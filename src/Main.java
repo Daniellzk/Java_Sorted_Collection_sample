@@ -16,6 +16,8 @@ public class Main {
 
         temp = new StockItem("cup", 0.50, 200);
         stockList.addStock(temp);
+        temp = new StockItem("cup", 0.50, 7);
+        stockList.addStock(temp);
 
         temp = new StockItem("door", 72.95, 4);
         stockList.addStock(temp);
@@ -39,5 +41,25 @@ public class Main {
         for(String s: stockList.Items().keySet()) {
             System.out.println(s);
         }
+
+
+
+
+
     }
+
+    public static int sellItem(Basket basket, String item, int quantity) {
+        //retrieve the item from stock list
+        StockItem stockItem = stockList.get(item);
+        if(stockItem == null) {
+            System.out.println("We don't sell " + item);
+            return 0;
+        }
+        if(stockList.sellStock(item, quantity) != 0) {
+            basket.addToBasket(stockItem, quantity);
+            return quantity;
+        }
+        return 0;
+    }
+
 }
